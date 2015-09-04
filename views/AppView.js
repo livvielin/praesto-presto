@@ -11,7 +11,12 @@ var AppView = Backbone.View.extend({
   el: 'body',
 
   events: {
-    'keypress input': 'handleAdd'
+    'keypress input': 'handleAdd',
+    'click div': 'render'
+  },
+
+  initialize: function() {
+    this.on('removeEntry', this.render, this);
   },
 
   handleAdd: function(e) {

@@ -4,6 +4,10 @@ var ListEntryModel = Backbone.Model.extend({
 
   defaults: {
     entry: ''
+  },
+
+  removeEntry: function() {
+    this.trigger('removeEntry', this);
   }
 
 });
