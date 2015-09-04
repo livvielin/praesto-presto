@@ -16,8 +16,9 @@
     <script>
       $(function() {
         // set up model objects
+        // var temp = [{},{},{}]
         var list = new ListEntryCollection();
-        var app = new AppModel({library: list});
+        var app = new AppModel({list: list});
 
         // build a view for the top level of the whole app
         var appView = new AppView({model: app});

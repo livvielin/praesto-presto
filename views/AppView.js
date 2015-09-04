@@ -11,16 +11,25 @@ var AppView = Backbone.View.extend({
   el: 'body',
 
   events: {
-    'keypress input': function(e) {
-      if (e.which == 13) {
-        e.preventDefault();
-        this.render();
-      }
+    'keypress input': 'handleAdd'
+  },
+
+  handleAdd: function(e) {
+    if (e.which == 13) {
+      e.preventDefault();
+      // create a new list entry model based on user input
+      var userInput = $('input').val();
+      var newEntry = new ListEntryModel();
+      newEntry.set('entry', userInput);
+      // add the new list entry model to the list entry collection
+      this.model.get('listEntryCollection').add(newEntry);
+      this.render();
     }
   },
 
   render: function() {
     this.$el.children().detach();
+
     // header html
     this.$el.append(this.headerHTML);
 
@@ -28,7 +37,11 @@ var AppView = Backbone.View.extend({
     this.$el.append(this.formHTML);
 
     // listentryviews
-
+    this.$el.append(
+      this.model.get('listEntryCollection').map(function(entry) {
+        return new ListEntryView({model: entry}).render();
+      })
+    ); 
 
     // footer
     this.$el.append(this.footerHTML);

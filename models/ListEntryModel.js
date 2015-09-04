@@ -2,8 +2,8 @@
 
 var ListEntryModel = Backbone.Model.extend({
 
-  // remove: function() {},
-  // add: function() {},
-  complete: function() {}
+  defaults: {
+    entry: ''
+  }
 
 });
